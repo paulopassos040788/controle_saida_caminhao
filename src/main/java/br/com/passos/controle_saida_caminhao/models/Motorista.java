@@ -19,7 +19,7 @@ public class Motorista {
     @Column(length = 80, nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 9)
     private Integer cnh;
 
 }
