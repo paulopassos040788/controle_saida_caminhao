@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service
@@ -30,6 +31,11 @@ public class MotoristaService {
     public List<Motorista> findAll() {
         List<Motorista> motoristas = motoristaRepository.findAll();
         return motoristas.stream().sorted(Comparator.comparing(Motorista::getNome)).toList();
+    }
+
+    public Motorista findByCnh(int cnh) {
+        Optional<Motorista> motorista = Optional.ofNullable(this.motoristaRepository.findByCnh(cnh));
+        return motorista.orElseThrow(() -> new RuntimeException("deu merda"));
     }
 
 }

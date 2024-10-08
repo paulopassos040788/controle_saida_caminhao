@@ -37,7 +37,13 @@ public class MotoristaController {
         List<Motorista> motoristas = motoristaService.findAll();
         List<MotoristaRequestDTO> dtos = motoristas.stream().map(motoristaMapper::map).toList();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(dtos);
+    }
 
+    @GetMapping("/{cnh}")
+    public ResponseEntity<MotoristaRequestDTO> pesquisaCnh(@PathVariable("cnh") int cnh){
+        Motorista motorista = motoristaService.findByCnh(cnh);
+        MotoristaRequestDTO dto = motoristaMapper.map(motorista);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(dto);
     }
 
 }
