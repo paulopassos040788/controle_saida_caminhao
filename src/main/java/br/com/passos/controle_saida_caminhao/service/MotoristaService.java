@@ -34,8 +34,8 @@ public class MotoristaService {
     }
 
     public Motorista findByCnh(int cnh) {
-        Optional<Motorista> motorista = Optional.ofNullable(this.motoristaRepository.findByCnh(cnh));
-        return motorista.orElseThrow(() -> new RuntimeException("deu merda"));
+        return Optional.ofNullable(this.motoristaRepository.findByCnh(cnh))
+                .orElseThrow(() -> new NotFoundException("Motorista com CNH " + cnh + " não encontrado."));
     }
 
 }
