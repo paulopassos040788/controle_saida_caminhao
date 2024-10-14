@@ -6,6 +6,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
 @Transactional
 @Service
 public class MotoristaService {
@@ -22,6 +26,16 @@ public class MotoristaService {
         } catch (DataIntegrityViolationException e) {
             throw new MotoristaUniqueException("A CNH que você está tentando cadastrar, já pertence a outro motorista.");
         }
+    }
+
+    public List<Motorista> findAll() {
+        List<Motorista> motoristas = motoristaRepository.findAll();
+        return motoristas.stream().sorted(Comparator.comparing(Motorista::getNome)).toList();
+    }
+
+    public Motorista findByCnh(int cnh) {
+        return Optional.ofNullable(this.motoristaRepository.findByCnh(cnh))
+                .orElseThrow(() -> new NotFoundException("Motorista com CNH " + cnh + " não encontrado."));
     }
 
 }

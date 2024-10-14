@@ -15,6 +15,7 @@ public interface MotoristaMapper {
     @Mapping(target = "cnh", source = "cnh")
     Motorista map(MotoristaRequestDTO motoristaRequestDTO);
 
-    //@Mapping(target = "name", source = "nome")
-    //UsuarioResponse map(UsuarioEntity usuarioEntity);
+    @Mapping(target = "nome", source = "nome")
+    @Mapping(target = "cnh", source = "cnh")
+    MotoristaRequestDTO map(Motorista motorista);
 }
