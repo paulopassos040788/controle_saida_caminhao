@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: 121314
       POSTGRES_DB: controle_veiculo
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
       - db_data:/var/lib/postgresql/data
@@ -22,7 +22,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/controle_veiculo
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/controle_veiculo
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 121314
     depends_on:
