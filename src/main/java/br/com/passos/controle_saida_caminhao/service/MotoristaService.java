@@ -38,4 +38,21 @@ public class MotoristaService {
                 .orElseThrow(() -> new NotFoundException("Motorista com CNH " + cnh + " não encontrado."));
     }
 
+    public void update(long id, Motorista motorista) {
+        Motorista motoristaAtual = this.motoristaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Motorista não encontrado."));
+
+        motoristaAtual.setNome(motorista.getNome());
+        motoristaAtual.setCnh(motorista.getCnh());
+
+        this.motoristaRepository.save(motoristaAtual);
+    }
+
+    public void delete(long id) {
+        this.motoristaRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Motorista não encontrado."));
+
+        this.motoristaRepository.deleteById(id);
+    }
+
 }
