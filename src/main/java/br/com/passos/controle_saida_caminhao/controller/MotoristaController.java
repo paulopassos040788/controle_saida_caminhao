@@ -46,4 +46,17 @@ public class MotoristaController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(dto);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> atualizaMotorista(@PathVariable("id") long id, @RequestBody MotoristaRequestDTO motoristaRequestDTO){
+        Motorista motorista = motoristaMapper.map(motoristaRequestDTO);
+        this.motoristaService.update(id, motorista);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarMotorista(@PathVariable("id") long id){
+        this.motoristaService.delete(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+    }
+
 }
